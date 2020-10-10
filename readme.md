@@ -15,6 +15,7 @@
     * usunięcie konta
     * modyfikacja konta
 * rejestracja dochodów
+    * crud
 * powiadomienia o zdarzeniach
     * cykliczne
         * podsumowanie wydaktów - raport
