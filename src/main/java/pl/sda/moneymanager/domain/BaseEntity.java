@@ -4,7 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,14 +23,14 @@ public class BaseEntity {
     private LocalDateTime creationTimestamp;
     private LocalDateTime updateTimestamp;
 
-    @PrePersist  //przed zapisaniem pierwszy raz
+    @PrePersist
     void setCreationTimestamp() {
         creationTimestamp = LocalDateTime.now();
         updateTimestamp = creationTimestamp;
     }
 
-    @PreUpdate  //Przed aktualizacją
-    void setUpdateTimestamp(){
+    @PreUpdate
+    void setUpdateTimestamp() {
         updateTimestamp = LocalDateTime.now();
     }
 }
