@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -15,5 +17,7 @@ import javax.persistence.Entity;
 public class Person extends BaseEntity {
     private String name;
     private String surname;
+    //zlecamy bazie aby zapisywała do bazy stringa a nie domyślnie integera EnumType.ORDINAL
+    @Enumerated(EnumType.STRING)
     private Sex sex;
 }
