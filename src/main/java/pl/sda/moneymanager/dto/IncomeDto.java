@@ -1,5 +1,6 @@
 package pl.sda.moneymanager.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,7 @@ import pl.sda.moneymanager.domain.BaseEntity;
 
 public class IncomeDto extends BaseEntity {
     private long incomeValueInCent;
+    @JsonProperty("osoba")
     private PersonDto person;
     private IncomeSourceDto incomeSource;
 }
