@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class BaseDto {
-    private Long id;
-    private LocalDateTime creationTimestamp;
-    private LocalDateTime updateTimestamp;
+//
+    protected Long id;
+    protected LocalDateTime creationTimestamp;
+    protected LocalDateTime updateTimestamp;
 
 }
