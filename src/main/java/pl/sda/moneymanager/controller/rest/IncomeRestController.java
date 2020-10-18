@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.sda.moneymanager.domain.Income;
+import pl.sda.moneymanager.dto.IncomeDto;
 import pl.sda.moneymanager.exception.MoneyGenericException;
 import pl.sda.moneymanager.service.IncomeService;
 
@@ -25,7 +25,7 @@ public class IncomeRestController {
    // /rest/incomes
     @GetMapping("/incomes")
     // ResponseEntity = status code + payload
-    ResponseEntity<List<Income>> allIncomes(){
+    ResponseEntity<List<IncomeDto>> allIncomes(){
         log.info("reading all incomes...");
         return  new ResponseEntity<>(incomeService.readAllIncomes(), HttpStatus.OK);
     }
@@ -33,9 +33,9 @@ public class IncomeRestController {
 // /rst/incomes/1
 
     @GetMapping("incomes/{id}")
-    ResponseEntity<Income> findIncomeById(@PathVariable("id") Long idik){
+    ResponseEntity<IncomeDto> findIncomeById(@PathVariable("id") Long idik){
         log.info("finding income by id: [{}]", idik);
-        ResponseEntity<Income> result = ResponseEntity
+        ResponseEntity<IncomeDto> result = ResponseEntity
                 .notFound()
                 .build();
         var searchResult = incomeService.findIncomeById(idik);
@@ -50,10 +50,10 @@ public class IncomeRestController {
 
     }
     @GetMapping("/v2/incomes/{id}")
-    ResponseEntity<Income> findIncomeByIdV2(@PathVariable("id") Long idik){
+    ResponseEntity<IncomeDto> findIncomeByIdV2(@PathVariable("id") Long idik){
         log.info("finding income by id: [{}]", idik);
 
-        Income foundResult = incomeService.findIncomeById(idik).orElseThrow(MoneyGenericException::new);
+        IncomeDto foundResult = incomeService.findIncomeById(idik).orElseThrow(MoneyGenericException::new);
 
         return ResponseEntity.ok(foundResult);
 
