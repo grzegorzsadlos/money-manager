@@ -23,6 +23,8 @@ public class IncomeRestController {
         this.incomeService = incomeService;
     }
    // /rest/incomes
+
+
     @GetMapping("/incomes")
     // ResponseEntity = status code + payload
     ResponseEntity<List<IncomeDto>> allIncomes(){
