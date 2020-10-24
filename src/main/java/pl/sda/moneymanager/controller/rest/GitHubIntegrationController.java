@@ -1,6 +1,8 @@
 package pl.sda.moneymanager.controller.rest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -12,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/github-int")
+@Slf4j
 public class GitHubIntegrationController {
 
 
@@ -34,15 +37,18 @@ public class GitHubIntegrationController {
     // zmieniamy na
     @GetMapping("/my-repos")
     public List<GithubRepoDto> myRepos() {
-        return gitHubService.allUserRepos();
-
-
-        // po refaktoryzacji do GitHubService
+        log.info("my repos");
+        return gitHubService.allUserRepos();// po refaktoryzacji do GitHubService
         //kontroler nie powinien posiadać logiki tylko użyć serwisu
-
         //            List.class
         //            List<GithubRepoDto>.class  chcielibyśmy zrobić ale nie zadziała
         //            var requestResult = restTemplate.getForObject(myRepoUrl, GithubRepoDto[].class);
         //            return Arrays.asList(requestResult);
+    }
+
+    @GetMapping("/repos/{userName}")
+    public List<GithubRepoDto> userRepos(@PathVariable("userName") String userName) {
+        log.info("user repos, user name = [{}]", userName);
+        return gitHubService.allReposOfGivenUser(userName);
     }
 }

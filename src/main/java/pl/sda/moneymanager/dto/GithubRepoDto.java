@@ -1,7 +1,9 @@
 package pl.sda.moneymanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class GithubRepoDto {
     @JsonProperty("id")
     private long projectId;
