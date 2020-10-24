@@ -1,14 +1,13 @@
 package pl.sda.moneymanager.controller.rest;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import pl.sda.moneymanager.dto.GithubRepoDto;
 import pl.sda.moneymanager.service.GitHubService;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,4 +50,15 @@ public class GitHubIntegrationController {
         log.info("user repos, user name = [{}]", userName);
         return gitHubService.allReposOfGivenUser(userName);
     }
+
+    //Create = 201 + header location
+    @PostMapping("/repos")
+//                           weź json'a z ciała requestu
+    public ResponseEntity<GithubRepoDto> createRepo (@RequestBody GithubRepoDto repoToCreate){
+        log.info("repo to create: [{}]", repoToCreate);
+        return  ResponseEntity.created(URI.create("/repos/1")).build();
+    }
+
+
+
 }
