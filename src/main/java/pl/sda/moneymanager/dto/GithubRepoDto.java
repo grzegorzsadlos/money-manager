@@ -1,7 +1,9 @@
 package pl.sda.moneymanager.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
+@Data
 public class GithubRepoDto {
     @JsonProperty("id")
     private long projectId;
@@ -10,6 +12,8 @@ public class GithubRepoDto {
     private String projectName;
 
     //bieże JSONA full_name  --> i mapuje na projectFullName
+//    jeżeli nazwa obiektu taka sama jak w JSON to nie
+//    musimy używać adnotacji @JsonProperty("******")
     @JsonProperty("full_name")
     private String projectFullName;
 
